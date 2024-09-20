@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :page do
-    user { nil }
+    user { create(:user) }
     title { "MyString" }
     slug { "MyString" }
     summary { "MyText" }

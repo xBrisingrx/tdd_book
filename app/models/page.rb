@@ -7,6 +7,7 @@ class Page < ApplicationRecord
   validates :content,
             presence: true
 
+  scope :published, -> { where(published: true) }
   before_validation :make_slug
 
   private

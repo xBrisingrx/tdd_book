@@ -8,4 +8,8 @@ FactoryBot.define do
     created_at { Time.zone.now }
     published { false }
   end
+
+  trait :published do
+    published { true }
+  end
 end

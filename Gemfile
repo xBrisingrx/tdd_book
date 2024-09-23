@@ -55,6 +55,8 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'webdrivers'
 end
 
 gem 'factory_bot_rails'

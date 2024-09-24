@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe 'Home' do
   it 'renders homepage' do
     create(:page, :published)
-    visit root_path
+    visit root_path #capybara nos habilita el metodo visit
     within 'header' do
       expect(page).to have_link 'My Blog'
     end

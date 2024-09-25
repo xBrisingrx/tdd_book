@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  get "/search", to: "search#index"
   get "pages/show"
-  get'page/:slug',
-    to: 'pages#show',
+  get "page/:slug",
+    to: "pages#show",
     slug: /[-a-z0-9+]*/,
     as: :page
 

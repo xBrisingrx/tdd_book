@@ -9,7 +9,18 @@ class Page < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(created_at: :desc) }
-  scope :by_term, ->(term) { [] }
+  scope :by_term, ->(term) do
+    # hacemos un split de las palabras que nos ingresan en la busqueda
+    # y vamos buscando por c/u de ellas
+    term.gsub!(/[^-\w ]/, "") # limpiamos todo caracter que no sea alfanumerico
+    terms = term.include?(" ") ? term.split : [ term ]
+
+    pages = Page
+    terms.each do |t|
+      pages = pages.where("content ILIKE ?", "%#{t}%")
+    end
+    pages
+  end
 
   before_validation :make_slug
 

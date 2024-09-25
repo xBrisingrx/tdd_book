@@ -9,6 +9,8 @@ class Page < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(created_at: :desc) }
+  scope :by_term, ->(term) { [] }
+
   before_validation :make_slug
 
   private

@@ -24,6 +24,18 @@ class Page < ApplicationRecord
 
   before_validation :make_slug
 
+  def self.month_year_list
+    sql = <<~SQL
+      SELECT DISTINCT
+        TRIM(TO_CHAR(created_at, 'Month')) AS month_name,
+        TO_CHAR(created_at, 'MM') AS month_number,
+        TO_CHAR(created_at, 'YYYY') AS year
+      FROM pages
+      ORDER BY year DESC, month_number DESC
+    SQL
+    ActiveRecord::Base.connection.execute(sql)
+  end
+
   private
   def make_slug
     self.slug = title

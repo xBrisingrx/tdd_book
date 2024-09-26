@@ -65,30 +65,30 @@ RSpec.describe Page, type: :model do
         expect(Page.by_term('foo baz')).to eq(expected)
       end
     end
-  end
 
-  describe '.month_year_list' do
-    let(:result) { Page.month_year_list }
+    describe '.month_year_list' do
+      let(:result) { Page.month_year_list }
 
-    before do
-      create(:page, created_at: Date.new(2022, 7, 21))
-      create(:page, :published, created_at: Date.new(2024, 8, 10))
-      create(:page, :published, created_at: Date.new(2024, 8, 23))
-      create(:page, :published, created_at: Date.new(2023, 6, 16))
-    end
+      before do
+        create(:page, created_at: Date.new(2022, 7, 21))
+        create(:page, :published, created_at: Date.new(2024, 8, 10))
+        create(:page, :published, created_at: Date.new(2024, 8, 23))
+        create(:page, :published, created_at: Date.new(2023, 6, 16))
+      end
 
-    it 'returns a list of results' do
-      expect(result.count).to eq(2)
-    end
+      it 'returns a list of results' do
+        expect(result.count).to eq(2)
+      end
 
-    it 'returns month and year' do
-      expect(result[0]['month_name']).to eq('August')
-      expect(result[0]['month_number']).to eq('08')
-      expect(result[0]['year']).to eq('2024')
+      it 'returns month and year' do
+        expect(result[0]['month_name']).to eq('August')
+        expect(result[0]['month_number']).to eq('08')
+        expect(result[0]['year']).to eq('2024')
 
-      expect(result[1]['month_name']).to eq('June')
-      expect(result[1]['month_number']).to eq('06')
-      expect(result[1]['year']).to eq('2023')
+        expect(result[1]['month_name']).to eq('June')
+        expect(result[1]['month_number']).to eq('06')
+        expect(result[1]['year']).to eq('2023')
+      end
     end
   end
 end

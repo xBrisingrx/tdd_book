@@ -23,7 +23,12 @@ class Page < ApplicationRecord
   end
 
   scope :by_year_month, ->(year, month) do
-    []
+    sql =  <<~SQL
+      extract(year from created_at) = ?
+      AND
+      extract(month from created_at) = ?
+    SQL
+    where(sql, year, month)
   end
 
   before_validation :make_slug

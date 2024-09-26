@@ -22,6 +22,10 @@ class Page < ApplicationRecord
     pages
   end
 
+  scope :by_year_month, ->(year, month) do
+    []
+  end
+
   before_validation :make_slug
 
   def self.month_year_list
